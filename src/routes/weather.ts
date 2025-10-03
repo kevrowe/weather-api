@@ -5,7 +5,7 @@ const router = express.Router({ mergeParams: true });
 
 router.get('/', (req, res: Response<CommonResponse<null>>) => {
   res.status(200).json({
-    error: null, 
+    error: null,
     data: null
   })
 })
