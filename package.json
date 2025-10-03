@@ -1,0 +1,20 @@
+{
+  "name": "weather-api",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon ./src/** --exec tsx ./src/index.ts"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.3"
+  },
+  "dependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.6.2",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.20.6"
+  }
+}
