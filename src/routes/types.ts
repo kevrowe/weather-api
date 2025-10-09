@@ -1,5 +1,5 @@
 type CommonResponse<T> = {
-    data: T
+    data: T | null
     error: string | null
 }
 

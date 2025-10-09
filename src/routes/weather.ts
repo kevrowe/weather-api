@@ -1,12 +1,13 @@
 import express, { type Response } from 'express';
 import type { CommonResponse } from './types';
 import { query } from '../lib/db';
+import type { Weather } from '../db/types';
 
 const router = express.Router({ mergeParams: true });
 
-router.get('/', async (_: any, res: Response<CommonResponse<any>>) => {
+router.get('/', async (_: any, res: Response<CommonResponse<Weather[]>>) => {
   try {
-    const allWeather = await query('SELECT * FROM weather')
+    const allWeather = await query<Weather>('SELECT * FROM weather')
 
     res.status(200).json({
       error: null,
