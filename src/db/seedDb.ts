@@ -80,9 +80,10 @@ export function seedDatabase(): Promise<void> {
         testData.weather.forEach(entry => {
           const windGust = entry.wind.gust || 0;
           const conditionId = entry.weather[0]!.id;
+          const timestamp = new Date(entry.dt * 1000).toISOString();
 
           weatherStmt.run(
-            entry.dt,
+            timestamp,
             entry.main.temp_min,
             entry.main.temp_max,
             entry.main.feels_like,

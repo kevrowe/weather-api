@@ -21,7 +21,7 @@ export function initializeDatabase(): Promise<void> {
       db.run(`
         CREATE TABLE IF NOT EXISTS weather (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
-          timestamp INTEGER NOT NULL,
+          timestamp DATETIME NOT NULL,
           temp_min REAL NOT NULL,
           temp_max REAL NOT NULL,
           feels_like REAL NOT NULL,

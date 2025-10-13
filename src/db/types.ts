@@ -7,7 +7,7 @@ export interface Condition {
 
 export interface Weather {
   id: number;
-  timestamp: number;
+  timestamp: string;
   temp_min: number;
   temp_max: number;
   feels_like: number;
