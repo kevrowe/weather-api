@@ -1,9 +1,9 @@
-import express, { type Request, type Response } from 'express';
+import { Router, type Request, type Response } from 'express';
 import type { CommonResponse } from './types';
 import { query } from '../lib/db';
 import type { Weather } from '../db/types';
 
-const router = express.Router({ mergeParams: true });
+const router: Router = Router({ mergeParams: true });
 
 router.get('/', async (_: Request, res: Response<CommonResponse<Weather[]>>) => {
   try {
