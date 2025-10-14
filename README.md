@@ -5,11 +5,19 @@
 Implement the following API endpoints in `src/routes/weather.ts`:
 
 ### 1. Get weather data for a specific date
+
 **Endpoint:** `GET /weather/by-date/:date`
 
 **Example:** `/weather/by-date/2025-10-10`
 
+**Notes**
+
+We are using sqlite for this project, to parse a `DateTime` to a date or time value in the `WHERE` clause, you can use `date(column_name)` or `time(column_name)`
+
+e.g. `SELECT * FROM table WHERE date(created_at) = "date-as-string"`
+
 **Requirements:**
+
 - Accept date in YYYY-MM-DD format
 - Return all weather records for that date
 - Include condition information (name, description) with each record
@@ -17,9 +25,11 @@ Implement the following API endpoints in `src/routes/weather.ts`:
 - Return 404 if no data exists for that date
 
 ### 2. Get five-day forecast
+
 **Endpoint:** `GET /weather/forecast`
 
 **Requirements:**
+
 - Return weather data at 12:00 (noon) for each of the next 5 days
 - Include condition information with each record
 - Sort results by date ascending
@@ -46,13 +56,15 @@ Add support for temperature unit conversion via query parameter:
 **Example:** `/weather/by-date/2025-10-10?tempUnit=F`
 
 **Requirements:**
+
 - Default to Kelvin if parameter not provided
 - Convert `temp_min`, `temp_max`, and `feels_like` fields
 - Return 400 if invalid unit specified
 
 **Conversion formulas:**
+
 - Kelvin to Celsius: `C = K - 273.15`
-- Kelvin to Fahrenheit: `F = (K - 273.15) × 9/5 + 32`
+- Kelvin to Fahrenheit: `F = (K - 273.15) ï¿½ 9/5 + 32`
 
 ## Tips
 
