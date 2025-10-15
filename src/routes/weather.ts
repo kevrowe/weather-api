@@ -40,14 +40,20 @@ router.get('/', async (_: Request, res: Response<CommonResponse<Weather[]>>) => 
 
 router.get('/forecast', async (req: Request, res: Response<CommonResponse<Weather[]>>) => {
   try {
-    let sql = `SELECT * FROM weather`
+    let sql = `SELECT *, 
+      conditions.name as conditions_name, 
+      conditions.description as conditions_description, 
+      conditions.icon as conditions_icon 
+      FROM weather`
     const { unit } = req.query
 
+    sql += " LEFT JOIN conditions on weather.conditions = conditions.id"
     /** 
      * Might need to help the candidate with converting 
      * the timestamp to a date for comparison
      */
     sql += " WHERE date(timestamp) <= ? AND time(timestamp) = ?"
+
     const params = ['2025-10-14', '12:00:00']
 
     const allWeather = await query<Weather>(sql, params)
@@ -83,7 +89,13 @@ router.get('/by-date/:date', async (req: Request, res: Response<CommonResponse<W
     const { unit } = req.query
     const params = []
     const dateRegex = /\d{4,4}\-\d{2,2}\-\d{2,2}/
-    let sql = `SELECT * FROM weather`
+    let sql = `
+      SELECT *, 
+      conditions.name as conditions_name, 
+      conditions.description as conditions_description, 
+      conditions.icon as conditions_icon 
+      FROM weather
+    `
 
     if (!date || !dateRegex.test(date)) {
       res.status(400).json({
@@ -97,6 +109,7 @@ router.get('/by-date/:date', async (req: Request, res: Response<CommonResponse<W
      * Might need to help the candidate with converting 
      * the timestamp to a date for comparison
      */
+    sql += " LEFT JOIN conditions on weather.conditions = conditions.id"
     sql += " WHERE date(timestamp) = ?"
     params.push(date)
 
